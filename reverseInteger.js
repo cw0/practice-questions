@@ -1,3 +1,5 @@
+//Reverse a given integer
+
 const reverse = (integer) => {
   let answer = 0;
   

@@ -1,9 +1,6 @@
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
- */
-var twoSum = function(nums, target) {
+//Find the first two numbers in an array that match the target sum
+
+const twoSum = function(nums, target) {
   var originalIndex = nums.length - 1;
   var trial = nums.pop();
       
