@@ -53,4 +53,28 @@ const isValid = (input) => {
   return isValidParenthesis;
 }
 
-console.log(isValid("{{)}"));
+const isValidHash = (input) => {
+  let stack = [];
+  let map = {
+    '(': ')',
+    '[': ']',
+    '{': '}'
+  };
+
+  for (let item of input.split('')) {
+    if (map.hasOwnProperty(item)) {
+      stack.push(item);
+    } else {
+      let previous = stack.pop();
+      if (map[previous] !== item) {
+        return false;
+      }
+    }
+  }
+
+  if (stack.length > 0) return false;
+
+  return true;
+}
+
+console.log(isValidHash("()"));
