@@ -1,4 +1,4 @@
-const climbStairs = (n) => {
+const climbStairsRecursively = (n) => {
   if (n === 1) return 1;
   let permutations = 0;
 
@@ -18,7 +18,19 @@ const climbStairs = (n) => {
   return permutations;
 };
 
+const climbStairsTab = (n) => {
+  if (n === 1) return 1;
+
+  const permutations = [1, 1];
+
+  for (let i = 2; i <= n; i += 1) {
+    permutations[i] = permutations[i - 1] + permutations[i - 2];
+  }
+
+  return permutations[n];
+};
 
 module.exports = {
-  climbStairs,
+  climbStairsRecursively,
+  climbStairsTab,
 };
