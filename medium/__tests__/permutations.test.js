@@ -14,11 +14,11 @@ describe('permutation tests:', () => {
   it('should work for arrays with 3 elements', () => {
     const expected = [
       [1, 2, 3],
-      [2, 1, 3],
-      [3, 2, 1],
       [1, 3, 2],
-      [3, 1, 2],
+      [2, 1, 3],
       [2, 3, 1],
+      [3, 2, 1],
+      [3, 1, 2],
     ];
     const result = permute([1, 2, 3]);
     expect(result).toStrictEqual(expected);
