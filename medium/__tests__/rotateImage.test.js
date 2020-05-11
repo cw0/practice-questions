@@ -21,3 +21,4 @@ describe('it should rotate images 90 degrees', () => {
     expect(result).toStrictEqual(twoByTwoImageSolution);
   });
 });
+
