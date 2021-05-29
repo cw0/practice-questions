@@ -1,14 +1,16 @@
 const minDeletions = (string) => {
   const characterDictionary = {};
   const frequencyDictionary = {};
-  const duplicateDictionary = {};
   const characters = string.split('');
   let count = 0;
 
   for (let i = 0; i < characters.length; i++) {
-    characterDictionary[characters[i]]
-      ? characterDictionary[characters[i]]++
-      : 1;
+    const char = characters[i];
+    if (!characterDictionary[char]) {
+      characterDictionary[char] = 1;
+    } else {
+      characterDictionary[char] += 1;
+    }
   }
 
   const characterKeys = Object.keys(characterDictionary);
@@ -17,18 +19,36 @@ const minDeletions = (string) => {
     const char = characterKeys[i];
     const freq = characterDictionary[char];
     if (!frequencyDictionary[freq]) {
-      frequencyDictionary[freq] = char;
+      frequencyDictionary[freq] = [char];
     } else {
-      if (!duplicateDictionary[freq]) {
-        duplicateDictionary[freq] = [char];
-      } else {
-        duplicateDictionary[freq].push(char);
-      }
+      frequencyDictionary[freq].push(char);
     }
   }
 
-  // sort frequency keys
-  // for each duplicate find the nearest gap
+  Object.keys(frequencyDictionary).forEach((key) => {
+    if (frequencyDictionary[key].length > 1) {
+      let duplicates = frequencyDictionary[key].length;
+      let nextLowestFreq = key - 1;
+
+      while (duplicates > 1) {
+        if (nextLowestFreq <= 0) {
+          duplicates -= 1;
+          count += ~~key;
+        } else {
+          if (!frequencyDictionary[nextLowestFreq]) {
+            frequencyDictionary[nextLowestFreq] = [
+              frequencyDictionary[key].pop(),
+            ];
+            duplicates -= 1;
+            count += key - nextLowestFreq;
+          }
+          nextLowestFreq -= 1;
+        }
+      }
+    }
+  });
+
+  return count;
 };
 
 module.exports = minDeletions;
